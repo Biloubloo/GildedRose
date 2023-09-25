@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.gildedrose.GildedRoseTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2023-09-25T09:46:34" hostname="ada.local.isima.fr" time="0.036">
+  <properties/>
+  <testcase name="Test behavior of Backstage passes" classname="com.gildedrose.GildedRoseTest" time="0.021"/>
+  <testcase name="Sulfura ne périme pas" classname="com.gildedrose.GildedRoseTest" time="0.001"/>
+  <testcase name="Test Backstage passes" classname="com.gildedrose.GildedRoseTest" time="0.001"/>
+  <testcase name="Test Le nom est inchangé" classname="com.gildedrose.GildedRoseTest" time="0.002"/>
+  <testcase name="Test La qualité ne dépasse pas 50" classname="com.gildedrose.GildedRoseTest" time="0.002"/>
+  <testcase name="Test La qualité se dégrade deux fois plus vite apres la date de péremption" classname="com.gildedrose.GildedRoseTest" time="0.0"/>
+  <testcase name="Test Backstage passes" classname="com.gildedrose.GildedRoseTest" time="0.001"/>
+  <testcase name="Test Qualité est positive" classname="com.gildedrose.GildedRoseTest" time="0.001"/>
+  <testcase name="Test Backstage passes" classname="com.gildedrose.GildedRoseTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
