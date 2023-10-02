@@ -22,13 +22,16 @@ class GildedRose {
             } else if (isBackstagePasses(item)) {
                 // Pour "Backstage Passes"
                 updateBackstagePasses(item);
+            } else if (isConjured(item)) {
+                // Pour "Conjured"
+                updateConjuredItem(item);
             }
         }
     }
 
     private boolean isNormalItem(Item item) {
         // Vérifie si l'élément est de type normal
-        return !isAgedBrie(item) && !isSulfuras(item) && !isBackstagePasses(item);
+        return !isAgedBrie(item) && !isSulfuras(item) && !isBackstagePasses(item) && !isConjured(item);
     }
 
     private boolean isAgedBrie(Item item) {
@@ -44,6 +47,11 @@ class GildedRose {
     private boolean isBackstagePasses(Item item) {
         // Vérifie si l'élément est "Backstage Passes"
         return item.name.equals("Backstage passes to a TAFKAL80ETC concert");
+    }
+
+    private boolean isConjured(Item item) {
+        // Vérifie si l'élément est "Conjured"
+        return item.name.equals("Conjured");
     }
 
     private void updateNormalItem(Item item) {
@@ -82,6 +90,17 @@ class GildedRose {
         }
     }
 
+    private void updateConjuredItem(Item item) {
+        // La qualité des éléments "Conjured" diminue deux fois plus vite que les objets normaux
+        decreaseQuality(item);
+        decreaseQuality(item);
+        decreaseSellIn(item);
+        if (item.sellIn < 0) {
+            decreaseQuality(item);
+            decreaseQuality(item);
+        }
+    }
+
     private void increaseQuality(Item item) {
         // Incrémente la qualité de l'élément si elle est inférieure à 50
         if (item.quality < 50) {
@@ -103,3 +122,4 @@ class GildedRose {
         }
     }
 }
+
