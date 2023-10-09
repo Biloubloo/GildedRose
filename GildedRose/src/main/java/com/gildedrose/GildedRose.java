@@ -8,54 +8,54 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        // Parcourt tous les éléments dans le tableau
         for (Item item : items) {
-            // Vérifie le type de l'élément et effectue la mise à jour appropriée
-            if (isNormalItem(item)) {
-                // Pour les éléments normaux
-                updateNormalItem(item);
-            } else if (isAgedBrie(item)) {
-                // Pour "Aged Brie"
-                updateAgedBrie(item);
-            } else if (isSulfuras(item)) {
-                // Pour "Sulfuras", pas de mise à jour nécessaire
-            } else if (isBackstagePasses(item)) {
-                // Pour "Backstage Passes"
-                updateBackstagePasses(item);
-            } else if (isConjured(item)) {
-                // Pour "Conjured"
-                updateConjuredItem(item);
-            }
+            updateItemQuality(item);
         }
     }
 
+    private void updateItemQuality(Item item) {
+        switch (item.name) {
+            case "Aged Brie":
+                updateAgedBrie(item);
+                break;
+            case "Sulfuras, Hand of Ragnaros":
+                // "Sulfuras" n'a pas besoin de mise à jour
+                break;
+            case "Backstage passes to a TAFKAL80ETC concert":
+                updateBackstagePasses(item);
+                break;
+            case "Conjured":
+                updateConjuredItem(item);
+                break;
+            default:
+                updateNormalItem(item);
+                break;
+        }
+    }
+
+    // Méthodes privées pour la logique spécifique à chaque type d'article
     private boolean isNormalItem(Item item) {
-        // Vérifie si l'élément est de type normal
         return !isAgedBrie(item) && !isSulfuras(item) && !isBackstagePasses(item) && !isConjured(item);
     }
 
     private boolean isAgedBrie(Item item) {
-        // Vérifie si l'élément est "Aged Brie"
         return item.name.equals("Aged Brie");
     }
 
     private boolean isSulfuras(Item item) {
-        // Vérifie si l'élément est "Sulfuras"
         return item.name.equals("Sulfuras, Hand of Ragnaros");
     }
 
     private boolean isBackstagePasses(Item item) {
-        // Vérifie si l'élément est "Backstage Passes"
         return item.name.equals("Backstage passes to a TAFKAL80ETC concert");
     }
 
     private boolean isConjured(Item item) {
-        // Vérifie si l'élément est "Conjured"
         return item.name.equals("Conjured");
     }
 
     private void updateNormalItem(Item item) {
-        // Mise à jour pour les éléments normaux
+        // Logique pour les éléments normaux
         decreaseQuality(item);
         decreaseSellIn(item);
         if (item.sellIn < 0) {
@@ -65,7 +65,7 @@ class GildedRose {
     }
 
     private void updateAgedBrie(Item item) {
-        // Mise à jour pour "Aged Brie"
+        // Logique pour "Aged Brie"
         increaseQuality(item);
         decreaseSellIn(item);
         if (item.sellIn < 0) {
@@ -75,7 +75,7 @@ class GildedRose {
     }
 
     private void updateBackstagePasses(Item item) {
-        // Mise à jour pour "Backstage Passes"
+        // Logique pour "Backstage Passes"
         increaseQuality(item);
         if (item.sellIn < 11) {
             increaseQuality(item);
@@ -91,7 +91,7 @@ class GildedRose {
     }
 
     private void updateConjuredItem(Item item) {
-        // La qualité des éléments "Conjured" diminue deux fois plus vite que les objets normaux
+        // Logique pour "Conjured"
         decreaseQuality(item);
         decreaseQuality(item);
         decreaseSellIn(item);
@@ -122,4 +122,3 @@ class GildedRose {
         }
     }
 }
-
