@@ -101,14 +101,14 @@ void testQualityDegradesTwiceAsFastAfterSellIn() {
   @Test
   @DisplayName("Test behavior of Backstage passes")
   void testBackstagePassesQualityEntre5et10() {
-    // Créez un produit Backstage pass avec une qualité initiale de 10 et une date de péremption de 12 jours
+    // Créez un produit Backstage pass avec une qualité initiale et une date de péremption
     Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 6, 20);
 
     // Créez une instance de GildedRose avec le produit Backstage pass
     GildedRose gildedRose = new GildedRose(new Item[]{backstagePass});
 
 // Appelez la méthode updateQuality plusieurs fois pour vérifier le comportement
-    gildedRose.updateQuality(); // Après la première mise à jour (11 jours restants)
+    gildedRose.updateQuality(); // Après la première mise à jour (5 jours restants)
     assertEquals(5, backstagePass.sellIn, "SellIn should decrease by 1");
     assertEquals(22, backstagePass.quality, "Quality should increase by 1");
 
@@ -119,14 +119,14 @@ void testQualityDegradesTwiceAsFastAfterSellIn() {
   @Test
   @DisplayName("Test Backstage passes")
   void testBackstagePassesQualityEntre0et5() {
-    // Créez un produit Backstage pass avec une qualité initiale de 10 et une date de péremption de 12 jours
+    // Créez un produit Backstage pass avec une qualité initiale et une date de péremption
     Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 4, 20);
 
     // Créez une instance de GildedRose avec le produit Backstage pass
     GildedRose gildedRose = new GildedRose(new Item[]{backstagePass});
 
 // Appelez la méthode updateQuality plusieurs fois pour vérifier le comportement
-    gildedRose.updateQuality(); // Après la première mise à jour (11 jours restants)
+    gildedRose.updateQuality(); 
     assertEquals(3, backstagePass.sellIn, "SellIn should decrease by 1");
     assertEquals(23, backstagePass.quality, "Quality should increase by 1");
 
@@ -137,13 +137,13 @@ void testQualityDegradesTwiceAsFastAfterSellIn() {
   @Test
   @DisplayName("Test Backstage passes")
   void testBackstagePassesQualityà0() {
-    // Créez un produit Backstage pass avec une qualité initiale de 10 et une date de péremption de 12 jours
+  
     Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 20);
 
     // Créez une instance de GildedRose avec le produit Backstage pass
     GildedRose gildedRose = new GildedRose(new Item[]{backstagePass});
 
- gildedRose.updateQuality(); // Après la douzième mise à jour (0 jours restants)
+ gildedRose.updateQuality(); 
     assertEquals(-1, backstagePass.sellIn, "SellIn should decrease by 1");
     assertEquals(0, backstagePass.quality, "Quality should drop to 0");
 } 
