@@ -62,7 +62,20 @@ void testQualityDegradesTwiceAsFastAfterSellIn() {
         
         assertTrue(item.quality <= 50, "Qualité ne dépasse pas 50");
     }
-    }
+
+}
+  @Test
+  @DisplayName("Test Aged Brie qualité")
+  void testAgedBrieQualityIncreaseOverTime() {
+    Item agedBrie = new Item("Aged Brie", 10, 10);
+    GildedRose gildedRose = new GildedRose(new Item[]{agedBrie});
+
+    gildedRose.updateQuality();
+    assertEquals(11, agedBrie.quality, "Aged Brie quality should increase");
+
+    // Continue checking quality increase for more days if necessary
+}
+
 
   @Test
   @DisplayName ("Sulfura ne périme pas") 
@@ -79,7 +92,8 @@ void testQualityDegradesTwiceAsFastAfterSellIn() {
         assertEquals(80, sulfuras.quality, "Qualité reste à 80");
         assertEquals(10, sulfuras.sellIn, "Date de péremption reste à 10");
     }
-  }
+}
+
   @Test
   @DisplayName("Test Backstage passes")
   void testBackstagePassesQuality() {
@@ -93,15 +107,13 @@ void testQualityDegradesTwiceAsFastAfterSellIn() {
     gildedRose.updateQuality(); // Après la première mise à jour (11 jours restants)
     assertEquals(11, backstagePass.sellIn, "SellIn should decrease by 1");
     assertEquals(11, backstagePass.quality, "Quality should increase by 1");
-
-
-
-  
 }
+
+
   @Test
-  @DisplayName("Test behavior of Backstage passes")
+  @DisplayName("Test Backstage passes entre 5 et 10")
   void testBackstagePassesQualityEntre5et10() {
-    // Créez un produit Backstage pass avec une qualité initiale et une date de péremption
+    // Créez un produit Backstage pass avec une qualité initiale de 20 et une date de péremption de 6 jours
     Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 6, 20);
 
     // Créez une instance de GildedRose avec le produit Backstage pass
@@ -111,15 +123,13 @@ void testQualityDegradesTwiceAsFastAfterSellIn() {
     gildedRose.updateQuality(); // Après la première mise à jour (5 jours restants)
     assertEquals(5, backstagePass.sellIn, "SellIn should decrease by 1");
     assertEquals(22, backstagePass.quality, "Quality should increase by 1");
-
-
-
-  
 }
+
+
   @Test
-  @DisplayName("Test Backstage passes")
+  @DisplayName("Test Backstage passes entre 0 et 5")
   void testBackstagePassesQualityEntre0et5() {
-    // Créez un produit Backstage pass avec une qualité initiale et une date de péremption
+    // Créez un produit Backstage pass avec une qualité initiale de 20 et une date de péremption de 4 jours
     Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 4, 20);
 
     // Créez une instance de GildedRose avec le produit Backstage pass
@@ -129,11 +139,9 @@ void testQualityDegradesTwiceAsFastAfterSellIn() {
     gildedRose.updateQuality(); 
     assertEquals(3, backstagePass.sellIn, "SellIn should decrease by 1");
     assertEquals(23, backstagePass.quality, "Quality should increase by 1");
-
-
-
-  
 }
+
+
   @Test
   @DisplayName("Test Backstage passes")
   void testBackstagePassesQualityà0() {
@@ -146,21 +154,67 @@ void testQualityDegradesTwiceAsFastAfterSellIn() {
  gildedRose.updateQuality(); 
     assertEquals(-1, backstagePass.sellIn, "SellIn should decrease by 1");
     assertEquals(0, backstagePass.quality, "Quality should drop to 0");
-} 
+}
+
+@Test
+@DisplayName("Test Backstage passes quality increase")
+void testBackstagePassesQualityIncrease() {
+  //  "Backstage Pass" avec une qualité initiale et une date de péremption variable
+  Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 12, 10);
+  GildedRose gildedRose = new GildedRose(new Item[]{backstagePass});
+
+  gildedRose.updateQuality(); // After the first update (11 days remaining)
+  assertEquals(11, backstagePass.quality, "Quality should increase by 1");
+
+  // Continuez à vérifier l'augmentation de la qualité pour plus de jours si nécessaire
+}
+
+@Test
+@DisplayName("Test Backstage passes quality drops to 0 after concert")
+void testBackstagePassesQualityDropsToZero() {
+  // Backstage pass avec une qualité initiale et une date de péremption réglée à 0
+  Item backstagePass = new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10);
+  GildedRose gildedRose = new GildedRose(new Item[]{backstagePass});
+
+  gildedRose.updateQuality();
+  assertEquals(0, backstagePass.quality, "Quality should drop to 0 after the concert");
+}
+
+
   @Test
   @DisplayName("Test Conjured item quality degradation")
   void testConjuredItemQualityDegradation() {
-    // Créez un élément "Conjured" avec une qualité initiale de 10 et une date de péremption de 5 jours
-    Item conjuredItem = new Item("Conjured", 5, 10);
+  // Créez un élément "Conjured" avec une qualité initiale de 10 et une date de péremption de 5 jours
+  Item conjuredItem = new Item("Conjured", 5, 10);
 
-    // Créez une instance de GildedRose avec l'élément "Conjured"
-    GildedRose gildedRose = new GildedRose(new Item[]{conjuredItem});
+  // Créez une instance de GildedRose avec l'élément "Conjured"
+  GildedRose gildedRose = new GildedRose(new Item[]{conjuredItem});
 
-    // Appelez la méthode updateQuality pour vérifier la dégradation de qualité accélérée
-    gildedRose.updateQuality();
+  // Appelez la méthode updateQuality pour vérifier la dégradation de qualité accélérée
+  gildedRose.updateQuality();
 
-    // La qualité devrait avoir diminué de 2
-    assertEquals(8, conjuredItem.quality, "Conjured item quality should degrade twice as fast");
+  // La qualité devrait avoir diminué de 2
+  assertEquals(8, conjuredItem.quality, "Conjured item quality should degrade twice as fast");
 }
+
+
+@Test
+@DisplayName("Test Conjured item quality degradation after sellIn")
+void testConjuredItemQualityDegradationAfterSellIn() {
+  // Créez un élément "Conjured" avec une qualité initiale de 10 et une date de péremption de 0 jours
+  Item conjuredItem = new Item("Conjured", 0, 10);
+
+  // Créez une instance de GildedRose avec l'élément "Conjured"
+  GildedRose gildedRose = new GildedRose(new Item[]{conjuredItem});
+
+  // Appelez la méthode updateQuality pour vérifier la dégradation de qualité accélérée
+  gildedRose.updateQuality();
+
+  // La qualité devrait avoir diminué de 4 (deux fois plus vite que les produits normaux)
+  assertEquals(6, conjuredItem.quality, "Conjured item quality should degrade twice as fast after sellIn");
+}
+
+
+
 
 }
